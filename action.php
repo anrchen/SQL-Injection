@@ -1,6 +1,11 @@
 <?php
-    if ($_POST['defense']=="prepared_statement"){
-        echo("Hello world");
+require 'config.php';
+    if ($_POST['defense']=="whitelist"){
+
+        $sql = "SELECT * FROM user WHERE email='test' OR 1='1'";
+        $rs = $mysqli->query($sql);
+        $row = $rs->fetch_array();
+        var_dump($row);
 
     }
 

@@ -2,7 +2,6 @@
 	session_start();
     require 'config.php';
 
-
 ?>
 
 
@@ -52,6 +51,8 @@
         </div>
       </form>
 	  <?php
+      $redirect = $_GET['url'];
+      header('location:' . $redirect);
 	  if(isset($_POST['login']))
 	  {
 		$username =$_POST['username'];
