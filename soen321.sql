@@ -61,3 +61,17 @@ ALTER TABLE `user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `procedureLogin`(
+  IN loc_username VARCHAR(45),
+  IN loc_password VARCHAR(45))
+BEGIN
+ SELECT email
+    FROM User
+   WHERE email = loc_username
+     AND password = loc_password
+;
+END $$
+DELIMITER ;
+
