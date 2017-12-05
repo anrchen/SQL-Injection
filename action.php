@@ -1,4 +1,5 @@
 <?php
+
 require ("config.php");
 $user = $_POST['email'];
 $password = $_POST['password'];
@@ -63,6 +64,7 @@ function stored_procedure($user, $password, $mysqli) {
     $rs = $mysqli->query($sql);
 
     echo "<script type='text/javascript'>alert('Query executed: '+$sql)</script>";
+
 
     if($rs) {
         if ($row = $rs->fetch_array()) {
