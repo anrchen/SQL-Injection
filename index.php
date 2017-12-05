@@ -39,6 +39,7 @@
             </label>
           </div>
             <div>
+                <input type="radio" name="defense" value=""/> Vulnerable Login <br>
                 <input type="radio" name="defense" value="prepared_statement"/> Prepared Statement <br>
                 <input type="radio" name="defense" value="stored_procedure"/> Stored Procedure <br>
                 <input type="radio" name="defense" value="whitelist"/> Whitelist <br>
@@ -50,33 +51,11 @@
           </div>
 
           <div class="col-md-8">
-             <a href="register.php">Create an account</button>
+             <a href="register.php">Create an account</a>
           </div>
 
         </div>
       </form>
-	  <?php
-	  if(isset($_POST['login']))
-	  {
-		$username =$_POST['username'];
-		$password=$_POST['password'];
-
-		$sql = "SELECT * FROM user WHERE email='$username' AND password='$password'";
-		$query_run = mysqli_query($con,$sql);
-		if(mysqli_num_rows($query_run)>0){
-			$_SESSION['username'] = $username;
-			header('location:process.php');
-
-	  }
-	  else
-	  {
-		  echo '<script type="text/javascript">alert("invalid creds") </script>';
-	  }
-	  }
-	  
-
-	  
-	  ?>
     </div> <!-- /container -->
   </body>
 </html>

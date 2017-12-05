@@ -3,15 +3,23 @@
 require ("config.php");
 $user = $_POST['email'];
 $password = $_POST['password'];
+$valid = "";
 
 if (empty($_POST['defense'])){
     login($user, $password, $mysqli);
+    $valid = true;
 } elseif ($_POST['defense']=="stored_procedure"){
     stored_procedure($user, $password, $mysqli);
+    $valid = true;
 } elseif ($_POST['defense']=="prepared_statement"){
     prepared_statement($user, $password, $mysqli);
+    $valid = true;
 }
 
+if ($valid){
+    $_SESSION['session_id'] = "123";
+    $_SESSION['is_admin'] = 1;
+}
 
 ?>
 
@@ -19,17 +27,15 @@ if (empty($_POST['defense'])){
 function login($user, $password, $mysqli) {
     $sql = 'SELECT * FROM User WHERE email="'.$user.'" AND password="'.$password.'"';
     $rs = $mysqli->query($sql);
-
-    if($rs) {
+    if($rs->num_rows) {
         if($row = $rs->fetch_array()) {
             echo "<script type='text/javascript'>alert('Log successfully!')</script>";
+            echo"<script type='text/javascript'>window.location.href='home.php';</script>";
         }
     } else {
-        echo "<script type='text/javascript'>alert('Failed!')</script>";
+        echo"<script type='text/javascript'>window.location.href='index.php';</script>";
 
     }
-
-    echo"<script type='text/javascript'>window.location.href='index.php';</script>";
 }
 
 function prepared_statement($user, $password, $mysqli){
@@ -48,15 +54,15 @@ function prepared_statement($user, $password, $mysqli){
             $_SESSION['Email'] = $user;
             exit();
         }
+        echo"<script type='text/javascript'>window.location.href='home.php';</script>";
 
     }
     else {
-        echo "<script type='text/javascript'>alert('Failed!')</script>";
+        echo"<script type='text/javascript'>window.location.href='index.php';</script>";
     }
     $stmt->close();
     $stmt->free_result();
 
-    echo"<script type='text/javascript'>window.location.href='index.php';</script>";
 }
 
 function stored_procedure($user, $password, $mysqli) {
@@ -69,12 +75,11 @@ function stored_procedure($user, $password, $mysqli) {
     if($rs) {
         if ($row = $rs->fetch_array()) {
             echo "<script type='text/javascript'>alert('Log successfully!')</script>";
+            echo"<script type='text/javascript'>window.location.href='home.php';</script>";
         }
     } else {
-        echo "<script type='text/javascript'>alert('Failed!')</script>";
-
+        echo"<script type='text/javascript'>window.location.href='index.php';</script>";
     }
 
-    echo"<script type='text/javascript'>window.location.href='index.php';</script>";
 }
 ?>

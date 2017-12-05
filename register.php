@@ -34,7 +34,7 @@
              <button class="btn btn-md btn-primary btn-block" name="register" type="submit">Register</button>
           </div>
           <div class="col-md-8">
-             <a href="index.php">Login</button>
+             <a href="index.php">Login</a>
           </div>
 
         </div>
