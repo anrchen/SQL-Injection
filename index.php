@@ -1,3 +1,11 @@
+<?php
+	session_start();
+    require 'config.php';
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,13 +26,13 @@
   <body>
 
     <div class="container">
-      <form class="form-signin">
+      <form class="form-signin" action = "index.php" method = "POST">
         <div class="wrapper">
           <h2 class="form-signin-heading">Please sign in</h2>
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <input type="email" id="inputEmail" name = "username" class="form-control" placeholder="Email address" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <input type="password" id="inputPassword" name = "password" class="form-control" placeholder="Password" required>
           <div class="checkbox">
             <label>
               <input type="checkbox" value="remember-me"> Remember me
@@ -33,7 +41,7 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
+             <button class="btn btn-md btn-primary btn-block" name="login" type="submit">Sign in#3</button>
           </div>
           <div class="col-md-4">
              <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
@@ -54,6 +62,28 @@
           </div>                          
         </div>
       </form>
+	  <?php
+	  if(isset($_POST['login']))
+	  {
+		$username =$_POST['username'];
+		$password=$_POST['password'];
+		
+		$sql = "SELECT * FROM user WHERE email='$username' AND password='$password'";
+		$query_run = mysqli_query($con,$sql);
+		if(mysqli_num_rows($query_run)>0){
+			$_SESSION['username'] = $username;
+			header('location:process.php');
+			
+	  }
+	  else
+	  {
+		  echo '<script type="text/javascript">alert("invalid creds") </script>';
+	  }
+	  }
+	  
+
+	  
+	  ?>
     </div> <!-- /container -->
   </body>
 </html>
