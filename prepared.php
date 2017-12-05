@@ -49,30 +49,38 @@
              <button class="btn btn-md btn-primary btn-block" name="login" type="submit">Sign in</button>
           </div>
 
-          <div class="col-md-8">
-             <a href="register.php">Create an account</button>
-          </div>
-
         </div>
       </form>
 	  <?php
-	  if(isset($_POST['login']))
-	  {
-		$username =$_POST['username'];
-		$password=$_POST['password'];
+	 if(isset($_POST['login'])){
+        $stmt = $mysqli->prepare("SELECT email, password FROM users WHERE email=? AND  password=? LIMIT 1");
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+        $stmt->bind_param('ss', $email, $password);
+        $stmt->execute();
+        $stmt->bind_result($email, $password);
+        $stmt->store_result();
+        if($stmt->num_rows == 1)  //To check if the row exists
+            {
+                while($stmt->fetch()) //fetching the contents of the row
 
-		$sql = "SELECT * FROM user WHERE email='$username' AND password='$password'";
-		$query_run = mysqli_query($con,$sql);
-		if(mysqli_num_rows($query_run)>0){
-			$_SESSION['username'] = $username;
-			header('location:process.php');
+                  {$_SESSION['Logged'] = 1;
+                   $_SESSION['Email'] = $email;
+                   exit();
+                   }
 
-	  }
-	  else
-	  {
-		  echo '<script type="text/javascript">alert("invalid creds") </script>';
-	  }
-	  }
+            }
+            else {
+                echo "Wrong Username or Password!";
+            }
+            $stmt->close();
+            $stmt->free_result();
+        }
+        else 
+        {   
+
+        }
+$mysqli->close();
 	  
 
 	  
