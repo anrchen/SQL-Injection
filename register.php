@@ -1,10 +1,4 @@
-<?php
-	session_start();
-    require 'config.php';
-
-?>
-
-
+<?php include('server.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,36 +19,27 @@
   <body>
 
     <div class="container">
-      <form class="form-signin" action = "action.php" method = "POST">
+      <form class="form-register" action = "register.php" method = "POST">
         <div class="wrapper">
-          <h2 class="form-signin-heading">Please sign in</h2>
+          <h2 class="form-signin-heading">Create account</h2>
           <label for="inputEmail" class="sr-only">Email address</label>
           <input type="email" id="inputEmail" name = "email" class="form-control" placeholder="Email address" required autofocus>
           <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" id="inputPassword" name = "password" class="form-control" placeholder="Password" required>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-            <div>
-                <input type="radio" name="defense" value=""/> Vulnerable Login <br>
-                <input type="radio" name="defense" value="prepared_statement"/> Prepared Statement <br>
-                <input type="radio" name="defense" value="stored_procedure"/> Stored Procedure <br>
-                <input type="radio" name="defense" value="whitelist"/> Whitelist <br>
-            </div>
+          
+            
         </div>
         <div class="row">
           <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" name="login" type="submit">Sign in</button>
+             <button class="btn btn-md btn-primary btn-block" name="register" type="submit">Register</button>
           </div>
-
           <div class="col-md-8">
-             <a href="register.php">Create an account</a>
+             <a href="index.php">Login</a>
           </div>
 
         </div>
       </form>
+	
     </div> <!-- /container -->
   </body>
 </html>
