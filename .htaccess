@@ -1,3 +1,11 @@
 RewriteEngine On
 
-RewriteRule ^login?$ index.php
+RewriteRule ^login?$ Index.php
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)$ Index.php?p=$1/$2 [L]
+
+
+RewriteRule ^home?$ lndex.php
+RewriteRule ^([a-zA-Z]+)/([a-zA-Z]+)$ lndex.php?p=$1/$2 [L]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php[L]

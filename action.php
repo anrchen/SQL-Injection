@@ -14,6 +14,9 @@ if (empty($_POST['defense'])){
 } elseif ($_POST['defense']=="prepared_statement"){
     prepared_statement($user, $password, $mysqli);
     $valid = true;
+} elseif ($_POST['defense'] =="whitelist"){
+    whitelist($mysqli);
+    $valid = true;
 }
 
 if ($valid){
@@ -37,7 +40,12 @@ function login($user, $password, $mysqli) {
 
     }
 }
-
+function whitelist($mysqli){
+        $sql = "SELECT * FROM user WHERE email='test' OR 1='1'";
+        $rs = $mysqli->query($sql);
+        $row = $rs->fetch_array();
+        var_dump($row);
+}
 function prepared_statement($user, $password, $mysqli){
     $stmt = $mysqli->prepare("SELECT email, password FROM User WHERE email=? AND  password=? LIMIT 1");
     $stmt->bind_param('ss', $user, $password);
