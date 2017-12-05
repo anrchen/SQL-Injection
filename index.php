@@ -26,7 +26,7 @@
   <body>
 
     <div class="container">
-      <form class="form-signin" action = "index.php" method = "POST">
+      <form class="form-signin" action = "action.php" method = "POST">
         <div class="wrapper">
           <h2 class="form-signin-heading">Please sign in</h2>
           <label for="inputEmail" class="sr-only">Email address</label>
@@ -38,28 +38,17 @@
               <input type="checkbox" value="remember-me"> Remember me
             </label>
           </div>
+            <div>
+                <input type="radio" name="defense" value="prepared_statement"/> Prepared Statement <br>
+                <input type="radio" name="defense" value="stored_procedure"/> Stored Procedure <br>
+                <input type="radio" name="defense" value="whitelist"/> Whitelist <br>
+            </div>
         </div>
         <div class="row">
           <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" name="login" type="submit">Sign in#3</button>
+             <button class="btn btn-md btn-primary btn-block" name="login" type="submit">Sign in</button>
           </div>
-          <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-          </div>      
-          <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 30px;">
-          <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-          </div>  
-          <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-          </div>
-          <div class="col-md-4">
-             <button class="btn btn-md btn-primary btn-block" type="submit">Sign in</button>
-          </div>                          
+
         </div>
       </form>
 	  <?php
@@ -67,13 +56,13 @@
 	  {
 		$username =$_POST['username'];
 		$password=$_POST['password'];
-		
+
 		$sql = "SELECT * FROM user WHERE email='$username' AND password='$password'";
 		$query_run = mysqli_query($con,$sql);
 		if(mysqli_num_rows($query_run)>0){
 			$_SESSION['username'] = $username;
 			header('location:process.php');
-			
+
 	  }
 	  else
 	  {
